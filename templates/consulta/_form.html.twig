@@ -1,0 +1,47 @@
+
+{{ form_start(form) }}
+ {{ form_errors(form) }}
+
+    <div class="form-group row">
+        <div class="col-12 col-md-6 mt-4">
+            <p class="lead">1) Es deseable que se reglamente el contenido y nivel de dificultad del examen de admisión?</p>
+            {{ form_errors(form.contenido) }}
+            {{ form_widget(form.contenido) }}
+        </div>
+    </div>
+
+<div class="form-group row">
+    <div class="col-12 col-md-6 mt-4">
+        <p class="lead">2) Qué habilidades y tipo de conocimientos que creemos que se deben detectar en el examen de admisión.</p>
+        {{ form_errors(form.habilidades) }}
+        {{ form_widget(form.habilidades, {'attr': {'class': 'select2'}}) }}
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-12 col-md-6 mt-4">
+        <p class="lead">3) Tipo de preguntas que deben incluirse/evitarse en el examen.</p>
+        {{ form_errors(form.preguntas) }}
+        {{ form_widget(form.preguntas, {'attr': {'class': 'select2'}}) }}
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-12 col-md-6 mt-4">
+        <p class="lead">4) Temas que deben ser incluidos/excluidos del examen de admisión.</p>
+        {{ form_errors(form.temas) }}
+        {{ form_widget(form.temas, {'attr': {'class': 'select2'}}) }}
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-12 col-md-6 mt-4">
+        <p class="lead">5) En este recuadro se pueden contribuir opiniones libres respecto a las preguntas anteriores.</p>
+        {{ form_errors(form.opinion) }}
+        {{ form_widget(form.opinion, {'attr': {'rows': 6 }}) }}
+    </div>
+</div>
+
+
+    {{ form_widget(form) }}
+    <button class="btn btn-outline-success my-5 ">{{ button_label|default('Enviar') }}</button>
+{{ form_end(form) }}

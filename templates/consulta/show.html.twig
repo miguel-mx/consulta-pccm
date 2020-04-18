@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consulta{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h2 class="my-5">Consulta</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Contenido</th>
+                <td>
+                    {{ consultum.contenido}}
+                </td>
+            </tr>
+            <tr>
+                <th>Habilidades</th>
+                <td>{% for habilidad in consultum.habilidades %}
+                        {{ habilidad }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Preguntas</th>
+                <td>{% for pregunta in consultum.preguntas %}
+                        {{ pregunta }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Temas</th>
+                <td>{% for tema in consultum.temas %}
+                        {{ tema }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Opinion</th>
+                <td>{{ consultum.opinion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('consulta_index') }}">Ver respuestas</a>
+
+    </div>
+{% endblock %}
