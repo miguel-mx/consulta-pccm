@@ -6,101 +6,133 @@
 {% block body %}
     <div class="container">
     <h2 class="my-5">Consulta PCCM</h2>
+    <h3 class="my-4">Resultados</h3>
 
-    {% set yes = 0 %}
-    {% set no = 0 %}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div id="contenido_div" style="border: 1px solid #ccc"></div>
+        </div>
+    </div>
 
-    {% set ingenio = 0 %}
-    {% set conocimientos = 0 %}
-    {% set comprension = 0 %}
+    <div class="row mt-4">
+        <div class="col-12 col-md-6">
+            <div id="habilidades_div" style="border: 1px solid #ccc"></div>
+        </div>
+    </div>
 
-    {% set calculos = 0 %}
-    {% set demostraciones = 0 %}
-    {% set opcion_multiple = 0 %}
-    {% set trucos = 0 %}
+    <div class="row mt-4">
+        <div class="col-12 col-md-6">
+            <div id="preguntas_div" style="border: 1px solid #ccc"></div>
+        </div>
+    </div>
 
-    {% set calculo = 0 %}
-    {% set algebra_lineal = 0 %}
-    {% set algebra_abstracta = 0 %}
-    {% set combinatoria = 0 %}
-    {% set probabilidad = 0 %}
-    {% set teoria_numeros = 0 %}
-    {% set ecuaciones = 0 %}
-    {% set geometria_diferencial = 0 %}
-    {% set topologia = 0 %}
-    {% set fisica = 0 %}
+    <div class="row mt-4">
+        <div class="col-12 col-md-6">
+            <div id="temas_div" style="border: 1px solid #ccc"></div>
+        </div>
+    </div>
 
+    <h2 class="my-4">Comentarios</h2>
     {% for consulta in consultas %}
-        {{ consulta.contenido }}
-        {% if consulta.contenido == true %} {% set yes = yes + 1%} {% else %}{% set no = no + 1 %}{% endif %}
-
-        {% if 'Ingenio e inventiva' in consulta.habilidades %} {% set ingenio = ingenio + 1 %}{% endif %}
-        {% if 'Conocimientos' in consulta.habilidades %} {% set conocimientos = conocimientos + 1 %}{% endif %}
-        {% if 'Comprensión de la teoría' in consulta.habilidades %} {% set compresion = comprension + 1 %}{% endif %}
-
-        {% if 'Cálculos rutinarios' in consulta.preguntas %} {% set calculos = calculos + 1 %}{% endif %}
-        {% if 'Demostraciones sencillas' in consulta.preguntas %} {% set demostraciones = demostraciones + 1 %}{% endif %}
-        {% if 'Opción múltiple' in consulta.preguntas %} {% set opcion_multiple = opcion_multiple + 1 %}{% endif %}
-        {% if 'Trucos ingeniosos' in consulta.preguntas %} {% set trucos = trucos + 1 %}{% endif %}
-
-        {% if 'Calculo' in consulta.temas %} {% set calculo = calculo + 1 %}{% endif %}
-        {% if 'Álgebra lineal' in consulta.temas %} {% set algebra_lineal = algebra_lineal + 1 %}{% endif %}
-        {% if 'Álgebra abstracta' in consulta.temas %} {% set algebra_abstracta = algebra_abstracta + 1 %}{% endif %}
-        {% if 'Combinatoria' in consulta.temas %} {% set combinatoria = combinatoria + 1 %}{% endif %}
-        {% if 'Probabilidad' in consulta.temas %} {% set probabilidad = probabilidad + 1 %}{% endif %}
-        {% if 'Teoría de números' in consulta.temas %} {% set teoria_numeros = teoria_numeros + 1 %}{% endif %}
-        {% if 'Ecuaciones diferenciales' in consulta.temas %} {% set ecuaciones = ecuaciones + 1 %}{% endif %}
-        {% if 'Geometría diferencial' in consulta.temas %} {% set geometria_diferencia = geometria_diferencia + 1 %}{% endif %}
-        {% if 'Topología' in consulta.temas %} {% set topologia = topologia + 1 %}{% endif %}
-        {% if 'Física' in consulta.temas %} {% set fisica = fisica + 1 %}{% endif %}
-
-    {% endfor %}
-
-    <table class="columns">
-        <tr>
-            <td><div id="contenido_div" style="border: 1px solid #ccc"></div></td>
-        </tr>
-    </table>
-
-    <script>
-        var ref = document.getElementById('myscript');
-        var script = document.createElement( 'script' );
-        script.src = '/js/consulta.js';
-        ref.parentNode.insertBefore( script, ref );
-    </script>
-
-    Yes = {{ yes }}
-    No = {{ no }}
-
-     <br>Ingenio = {{ ingenio }}
-     <br>Conocimientos = {{ conocimientos }}
-     <br>Comprensión = {{ comprension }}
-
-        <br><br>Cálculos rutinarios: {{ calculos }}
-        <br>Demostraciones sencillas {{ demostraciones }}
-        <br>Opción Múltiple {{ opcion_multiple }}
-        <br>Trucos ingeniosos {{ trucos }}
-
-        {% for consulta in consultas %}
-            <div class="row my-4">
-                <div class="col-12 col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            {{ consulta.opinion }}
-                        </div>
+        <div class="row my-4">
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        {{ consulta.opinion }}
                     </div>
                 </div>
             </div>
-        {% endfor %}
-
+        </div>
+    {% endfor %}
 
     </div>
 
-     <!--Table and divs that hold the pie charts-->
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript" id="google-charts" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        // Load Charts and the corechart and barchart packages.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Draw the pie chart and bar chart when Charts is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var contenido = new google.visualization.DataTable();
+            contenido.addColumn('string', 'Contenido');
+            contenido.addColumn('number', 'Conteo');
+            contenido.addRows([
+                ['Yes', {{ contenido.yes }}],
+                ['No', {{ contenido.no }}]
+            ]);
+
+            var contenido_options = {title:'Reglamentación de Contenido',
+                width:400,
+                height:300};
+            var contenido_barchart = new google.visualization.BarChart(document.getElementById('contenido_div'));
+            contenido_barchart.draw(contenido, contenido_options);
+
+            // Habilidades
+            var habilidades = new google.visualization.DataTable();
+            habilidades.addColumn('string', 'Habilidades');
+            habilidades.addColumn('number', 'Conteo');
+            habilidades.addRows([
+                ['Ingenio', {{ habilidades.ingenio }}],
+                ['Conocimientos', {{ habilidades.conocimientos }}],
+                ['Compresion', {{ habilidades.comprension }}]
+            ]);
+
+            var habilidades_options = {title:'Habilidades a Detectar',
+                width:400,
+                height:300};
+            var habilidades_barchart = new google.visualization.BarChart(document.getElementById('habilidades_div'));
+            habilidades_barchart.draw(habilidades, habilidades_options);
+
+            // Preguntas
+            var preguntas = new google.visualization.DataTable();
+            preguntas.addColumn('string', 'Preguntas');
+            preguntas.addColumn('number', 'Conteo');
+            preguntas.addRows([
+                ['Calculos', {{ preguntas.calculos }}],
+                ['Demostraciones', {{ preguntas.demostraciones }}],
+                ['Opcion Múltiple', {{ preguntas.opcion_multiple }}],
+                ['Trucos Ingeniosos', {{ preguntas.trucos }}]
+            ]);
+
+            var preguntas_options = {title:'Tipo de Preguntas',
+                width:400,
+                height:300};
+            var preguntas_barchart = new google.visualization.BarChart(document.getElementById('preguntas_div'));
+            preguntas_barchart.draw(preguntas, preguntas_options);
+
+            // Temas
+            var temas = new google.visualization.DataTable();
+            temas.addColumn('string', 'Temas');
+            temas.addColumn('number', 'Conteo');
+            temas.addRows([
+                ['Calculo', {{ temas.calculo }}],
+                ['Algebra Lineal', {{ temas.algebra_lineal }}],
+                ['Algebra Abstracta', {{ temas.algebra_abstracta }}],
+                ['Combinatoria', {{ temas.combinatoria }}],
+                ['Probabilidad', {{ temas.probabilidad }}],
+                ['Teoría de números', {{ temas.teoria_numeros }}],
+                ['Ecuaciones diferenciales', {{ temas.ecuaciones }}],
+                ['Geometría diferencial', {{ temas.geometria_diferencial }}],
+                ['Topología', {{ temas.topologia }}],
+                ['Física', {{ temas.fisica }}],
+            ]);
+
+            var temas_options = {title:'Temas para el examen de admisión',
+                width:400,
+                height:300};
+            var temas_barchart = new google.visualization.BarChart(document.getElementById('temas_div'));
+            temas_barchart.draw(temas, temas_options);
+
+        }
+    </script>
 
 {% endblock %}
