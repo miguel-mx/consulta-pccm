@@ -23,17 +23,17 @@ class Consulta
     private $contenido;
 
     /**
-     * @ORM\Column(type="array", length=255)
+     * @ORM\Column(type="array", length=512)
      */
     private $habilidades;
 
     /**
-     * @ORM\Column(type="array", length=255)
+     * @ORM\Column(type="array", length=512)
      */
     private $preguntas;
 
     /**
-     * @ORM\Column(type="array", length=255)
+     * @ORM\Column(type="array", length=512)
      */
     private $temas;
 

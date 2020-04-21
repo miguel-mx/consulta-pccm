@@ -22,8 +22,21 @@ class ConsultaController extends AbstractController
     {
         $consultas = $consultaRepository->findAll();
         $contenido = array('yes' => 0, 'no' => 0);
-        $habilidades = array('ingenio' => 0, 'conocimientos' => 0, 'comprension' => 0);
-        $preguntas = array('calculos' => 0, 'demostraciones' => 0, 'opcion_multiple' => 0, 'trucos' => 0);
+        $habilidades = array(
+            'ingenio' => 0,
+            'conocimientos_generales' => 0,
+            'conocimientos_especificos' => 0,
+            'redaccion' => 0,
+            'comprension' => 0,
+        );
+        $preguntas = array(
+            'calculos' => 0,
+            'demostraciones' => 0,
+            'opcion_multiple' => 0,
+            'trucos' => 0,
+            'olimpiada' => 0,
+        );
+
         $temas = array(
             'calculo' => 0,
             'algebra_lineal' => 0,
@@ -43,7 +56,9 @@ class ConsultaController extends AbstractController
 
             // Habilidades
             if(in_array('Ingenio e inventiva', $consulta->getHabilidades())) $habilidades['ingenio']++;
-            if(in_array('Conocimientos', $consulta->getHabilidades())) $habilidades['conocimientos']++;
+            if(in_array('Conocimientos generales', $consulta->getHabilidades())) $habilidades['conocimientos_generales']++;
+            if(in_array('Conocimientos de materias específicas', $consulta->getHabilidades())) $habilidades['conocimientos_especificos']++;
+            if(in_array('Claridad en redacción de soluciones', $consulta->getHabilidades())) $habilidades['redaccion']++;
             if(in_array('Comprensión de la teoría', $consulta->getHabilidades())) $habilidades['comprension']++;
 
             // Preguntas
@@ -51,6 +66,7 @@ class ConsultaController extends AbstractController
             if(in_array('Demostraciones sencillas', $consulta->getPreguntas())) $preguntas['demostraciones']++;
             if(in_array('Opción múltiple', $consulta->getPreguntas())) $preguntas['opcion_multiple']++;
             if(in_array('Trucos ingeniosos', $consulta->getPreguntas())) $preguntas['trucos']++;
+            if(in_array('Preguntas tipo olimpiada', $consulta->getPreguntas())) $preguntas['olimpiada']++;
 
             // Temas
             if(in_array('Calculo', $consulta->getTemas())) $temas['calculo']++;

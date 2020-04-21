@@ -12,7 +12,7 @@
 
 <div class="form-group row">
     <div class="col-12 col-md-6 mt-4">
-        <p class="lead">2) Qué habilidades y tipo de conocimientos que creemos que se deben detectar en el examen de admisión.</p>
+        <p class="lead">2) Qué habilidades y tipo de conocimientos se deben detectar en el examen.</p>
         {{ form_errors(form.habilidades) }}
         {{ form_widget(form.habilidades, {'attr': {'class': 'select2'}}) }}
     </div>
@@ -20,14 +20,14 @@
 
 <div class="form-group row">
     <div class="col-12 col-md-6 mt-4">
-        <p class="lead">3) Tipo de preguntas que deben incluirse/evitarse en el examen.</p>
+        <p class="lead">3) Tipo de preguntas que deben incluirse en el examen.</p>
         {{ form_errors(form.preguntas) }}
         {{ form_widget(form.preguntas, {'attr': {'class': 'select2'}}) }}
     </div>
 </div>
 <div class="form-group row">
     <div class="col-12 col-md-6 mt-4">
-        <p class="lead">4) Temas que deben ser incluidos/excluidos del examen de admisión.</p>
+        <p class="lead">4) Conocimientos específicos que deben ser incluidos en el examen.</p>
         {{ form_errors(form.temas) }}
         {{ form_widget(form.temas, {'attr': {'class': 'select2'}}) }}
     </div>

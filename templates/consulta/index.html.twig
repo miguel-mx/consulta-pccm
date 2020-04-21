@@ -71,8 +71,8 @@
             ]);
 
             var contenido_options = {title:'Reglamentación de Contenido',
-                width:400,
-                height:300};
+                width:300,
+                height:200};
             var contenido_barchart = new google.visualization.BarChart(document.getElementById('contenido_div'));
             contenido_barchart.draw(contenido, contenido_options);
 
@@ -81,14 +81,16 @@
             habilidades.addColumn('string', 'Habilidades');
             habilidades.addColumn('number', 'Conteo');
             habilidades.addRows([
-                ['Ingenio', {{ habilidades.ingenio }}],
-                ['Conocimientos', {{ habilidades.conocimientos }}],
-                ['Compresion', {{ habilidades.comprension }}]
+                ['Ingenio e inventiva', {{ habilidades.ingenio }}],
+                ['Conocimientos generales', {{ habilidades.conocimientos_generales }}],
+                ['Conocimientos generales', {{ habilidades.conocimientos_especificos }}],
+                ['Claridad en redacción', {{ habilidades.redaccion }}],
+                ['Compresion  de la teoría', {{ habilidades.comprension }}]
             ]);
 
             var habilidades_options = {title:'Habilidades a Detectar',
-                width:400,
-                height:300};
+                width:500,
+                height:500};
             var habilidades_barchart = new google.visualization.BarChart(document.getElementById('habilidades_div'));
             habilidades_barchart.draw(habilidades, habilidades_options);
 
@@ -97,15 +99,16 @@
             preguntas.addColumn('string', 'Preguntas');
             preguntas.addColumn('number', 'Conteo');
             preguntas.addRows([
-                ['Calculos', {{ preguntas.calculos }}],
-                ['Demostraciones', {{ preguntas.demostraciones }}],
-                ['Opcion Múltiple', {{ preguntas.opcion_multiple }}],
-                ['Trucos Ingeniosos', {{ preguntas.trucos }}]
+                ['Calculos rutinarios', {{ preguntas.calculos }}],
+                ['Demostraciones sencillas', {{ preguntas.demostraciones }}],
+                ['Opción múltiple', {{ preguntas.opcion_multiple }}],
+                ['Trucos ingeniosos', {{ preguntas.trucos }}],
+                ['Preguntas tipo olimpiada', {{ preguntas.olimpiada }}]
             ]);
 
             var preguntas_options = {title:'Tipo de Preguntas',
-                width:400,
-                height:300};
+                width:500,
+                height:500};
             var preguntas_barchart = new google.visualization.BarChart(document.getElementById('preguntas_div'));
             preguntas_barchart.draw(preguntas, preguntas_options);
 
@@ -127,8 +130,8 @@
             ]);
 
             var temas_options = {title:'Temas para el examen de admisión',
-                width:400,
-                height:300};
+                width:500,
+                height:700};
             var temas_barchart = new google.visualization.BarChart(document.getElementById('temas_div'));
             temas_barchart.draw(temas, temas_options);
 

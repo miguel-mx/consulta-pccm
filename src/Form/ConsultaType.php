@@ -27,7 +27,9 @@ class ConsultaType extends AbstractType
                 'multiple' => true,
                 'choices'  => [
                     'Ingenio e inventiva' => 'Ingenio e inventiva',
-                    'Conocimientos' => 'Conocimientos',
+                    'Conocimientos generales' => 'Conocimientos generales',
+                    'Conocimientos de materias específicas' => 'Conocimientos de materias específicas',
+                    'Claridad en redacción de soluciones' => 'Claridad en redacción de soluciones',
                     'Comprensión de la teoría' => 'Comprensión de la teoría',
                 ],
             ])
@@ -38,6 +40,7 @@ class ConsultaType extends AbstractType
                     'Demostraciones sencillas' => 'Demostraciones sencillas',
                     'Opción múltiple' => 'Opción múltiple',
                     'Trucos ingeniosos' => 'Trucos ingeniosos',
+                    'Preguntas tipo olimpiada' => 'Preguntas tipo olimpiada',
                 ],
             ])
             ->add('temas', ChoiceType::class, [
